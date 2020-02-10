@@ -1,10 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="refresh" content="4;URL='3balls.html'">
+    <title>SOLVE - Mechanics of Machines Lab - Zeroth Law of Thermodynamics</title>
+    <link rel="stylesheet" href="sins/MOMstyle.css" />
+<!--    <link type="text/css" rel="stylesheet" href="css/main.css">-->
+
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js'></script>
+
+    <script type="text/javascript" >
+        //Script specific to simulation
+        //program variables
+        //controls section
+        // import * as THREE from './js/three.module.js';
+        // var container, stats;
+        // var camera, scene, renderer;
+        // var mouseX = 0, mouseY = 0;
+        // var windowHalfX = window.innerWidth / 2;
+        // var windowHalfY = window.innerHeight / 2;
+
+        // init();
+        // animate();
+
+        var simstatus=0;
+        //comments section
+        var commenttext="Some Text";
+        var commentloc=0;
+        //graphics section
+        var canvas;
+        var ctx;
+        //timing section
+        var simTimeId = setInterval("",'1000');
+        var pauseTime = setInterval("",'1000');
+        //point tracing section
+        var ptx = [];
+        var pty = [];
+        //click status of legend and quick reference
+        var legendCS = false;
+        var quickrefCS = false;
+        //temporary or dummy variables
+
+        //change simulation specific css content. e.g. padding on top of variable to adjust appearance in variables window
+        function editcss()
+        {
+            $('.variable').css('padding-top','20px');
+            $('#datatable1').css('position','absolute');
+            $('#datatable2').css('position','absolute');
+            $('#datatable1').css('left','120px');
+            $('#datatable1').css('top','340px');
+            $('#datatable2').css('left','395px');
+            $('#datatable2').css('top','340px');
+
+        }
+        //start of simulation here; starts the timer with increments of 0.1 seconds
+        function startsim()
+        {
+            simTimeId=setInterval("time=time+0.1; varupdate(); ",'100');
+        }
+        // switches state of simulation between 0:Playing & 1:Paused
+        function simstate()
+        {
+            var imgfilename=document.getElementById('playpausebutton').src;
+            imgfilename = imgfilename.substring(imgfilename.lastIndexOf('/') + 1, imgfilename.lastIndexOf('.'));
+            if (imgfilename=="bluepausedull")
+            {
+                document.getElementById('playpausebutton').src="sins/blueplaydull.png";
+                clearInterval(simTimeId);
+                simstatus=1;
+                $('#l1spinner').spinner("value",len);			//to set simulation parameters on pause
+                pauseTime=setInterval("varupdate();",'100');
+            }
+            if (imgfilename=="blueplaydull")
+            {
+                time=0;
+                clearInterval(pauseTime);
+                document.getElementById('playpausebutton').src="sins/bluepausedull.png";
+                simTimeId=setInterval("time=time+0.1; varupdate(); ",'100');
+                simstatus=0;
+            }
+        }
+        //Initialise system parameters here
+        function varinit()
+        {
+            varchange();
+            //Variable r1 slider and number input types
+            $('#l1slider').slider("value", 30);
+            $('#l1spinner').spinner("value", 30);
+        }
+
+        function varchange()
+        {
+//Variable r1 slider and number input types
+            $('#l1slider').slider({ max : 100, min : 30, step : 1 });		// slider initialisation : jQuery widget
+            $('#l1spinner').spinner({ max : 100, min : 30, step : 1 });		// number initialisation : jQuery widget
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+            $( "#l1slider" ).on( "slide", function( e, ui ) { $('#l1spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+            $( "#l1spinner" ).on( "spin", function( e, ui ) { $('#l1slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+            $( "#l1spinner" ).on( "change", function() {  varchange() } );
+            varupdate();
+        }
+        //Computing of various system parameters
+        function varupdate()
+        {
+
+            $('#l1slider').slider("value", $('#l1spinner').spinner('value'));  //updating slider location with change in spinner(debug) -->
+            len=$('#l1spinner').spinner("value");
+        }
+    </script>
 </head>
-<body>
-    hello world
+
+<body onload="editcss(); startsim(); varinit();">
+
+<noscript>
+    The simulation requires JavaScript to be enabled.
+</noscript>
+<div id="container">
+    <div id="simtitle">Zeroth Law of Thermodynamics</div>
+
+    <canvas id="simscreen" height="390px" width="590px"></canvas>
+
+    <div id="titleincanvas"></div>
+    <div id="commentboxleft"></div>
+    <div id="commentboxright"></div>
+    <div id="vartitle">VARIABLES</div>
+
+    <div id="variables">
+
+        <div class="variable">
+            <div class="varname">
+                <p title="Link Length">Temp(C<sup>o</sup>)</p>
+                <input id="l1spinner" type="number" placeholder="30" id="Temp" value="" autocomplete="off" size="20">
+            </div>
+            <div id="l1slider"></div>
+        </div>
+    </div>
+    <!--    DND-Title of region for controls display-->
+    <div id="ctrltitle">CONTROLS</div>
+    <!-- Region for User controls of simulation-->
+    <div id="controls">
+        <img id="playpausebutton" onclick="simstate()" src="sins/bluepausedull.png" />
+    </div>
+    <!-- DND-Copyright display-->
+    <div id="copyright" title="Developer : SOLVEr"> Copyright &copy; SOLVE The Virtual Lab @ NITK Surathkal </div>
+
+</div>
+<!--   Container div close-->
 </body>
 </html>
