@@ -2,7 +2,8 @@ div#container
 {
 	width: 800px;
 	height: 600px;
-	background: url("frame_copper_ver02.png") no-repeat;
+	background-repeat: no-repeat;
+	background-image: url("frame_copper_ver02.png");
 }
 
 div#simtitle
