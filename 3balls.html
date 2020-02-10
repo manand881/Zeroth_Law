@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:background-image="http://www.w3.org/1999/xhtml">
+<html lang="en-US">
 <head>
 	<title>Zeroth Law of thermodynamics</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-<!--	<link type="text/css" rel="stylesheet" href="css/main.css">-->
 	<link rel="stylesheet" href="sins/MOMstyle.css">
 	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
 	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js'></script>
@@ -16,12 +14,11 @@
 
 		var container, stats;
 		var camera, scene, renderer;
-		var mouseX = 0, mouseY = 0, mouseZ = 0;
+		var mouseX = 0, mouseY = 0;
 		var windowHalfX = window.innerWidth / 2;
 		// var windowHalfX = 250;
 
 		var windowHalfY = window.innerHeight / 2;
-		var windowHalfZ = window.innerHeight / 2;
 		// var windowHalfY = 250;
 
 
@@ -152,8 +149,6 @@
 
 			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
-			//
-
 			// window.addEventListener( 'resize', onWindowResize, false );
 
 		}
@@ -191,7 +186,7 @@
 </head>
 <body>
 
-<div id="container" style="background-image: url('sins/frame_copper_ver02.png');">
+<div id="container">
 	<div id="simtitle">Zeroth Law of Thermodynamics</div>
 	<div id="titleincanvas"></div>
 	<div id="commentboxleft"></div>
@@ -213,10 +208,9 @@
 <div id="ctrltitle">CONTROLS</div>
 <!-- Region for User controls of simulation-->
 <div id="controls">
-	<img id="playpausebutton" onclick="simstate()" src="sins/bluepausedull.png" />
+	<img id="playpausebutton" src="sins/bluepausedull.png" />
 </div>
 <!-- DND-Copyright display-->
 <div id="copyright" title="Developer : SOLVEr"> Copyright &copy; SOLVE The Virtual Lab @ NITK Surathkal </div>
-
 </body>
 </html>
