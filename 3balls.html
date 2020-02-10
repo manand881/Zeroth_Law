@@ -5,7 +5,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <!--	<link type="text/css" rel="stylesheet" href="css/main.css">-->
-	<link type="text/css" rel="stylesheet" href="sins/MOMstyle.css">
+	<link rel="stylesheet" href="sins/MOMstyle.css">
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js'></script>
 </head>
 <body>
 
@@ -111,7 +113,7 @@
 
 		var radius = 200;
 
-		var geometry1 = new THREE.IcosahedronBufferGeometry( radius, 2 );
+		var geometry1 = new THREE.IcosahedronBufferGeometry( radius, 1 );
 
 		var count = geometry1.attributes.position.count;
 		geometry1.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( count * 3 ), 3 ) );
