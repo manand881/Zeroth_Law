@@ -9,7 +9,8 @@
 	<script type="module">
 
 		import * as THREE from './js/three.module.js';
-		
+
+		var flag=true;
 		var container, stats;
 		var camera, scene, renderer;
 		var mouseX = 0, mouseY = 0;
@@ -32,6 +33,7 @@
 			camera = new THREE.PerspectiveCamera( 20, 1.5, 1, 10000 );
 			// console.log(window.innerWidth / window.innerHeight);
 			camera.position.z = 2600;
+			var test=camera.position.z;
 
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color( 0xffffff );
@@ -39,15 +41,14 @@
 			var light = new THREE.DirectionalLight( 0xffffff );
 			light.position.set( 0, 0, 1 );
 			scene.add( light );
-			// shadow
-
+			
 			var canvas = document.createElement( 'canvas' );
 			canvas.width = 128;
 			canvas.height = 128;
 
 			var context = canvas.getContext( '2d' );
 			var gradient = context.createRadialGradient( canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2 );
-			gradient.addColorStop( 0.1, 'rgba(210,210,210,1)' );
+			gradient.addColorStop( 0.1, 'rgba(210,210,210,1)' );	//shadow
 			gradient.addColorStop( 1, 'rgba(255,255,255,1)' );
 
 			context.fillStyle = gradient;
@@ -79,7 +80,7 @@
 
 			var radius = 200;
 
-			var geometry1 = new THREE.IcosahedronBufferGeometry( radius, 1 );
+			var geometry1 = new THREE.IcosahedronBufferGeometry( radius, 2 );
 
 			var count = geometry1.attributes.position.count;
 			geometry1.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( count * 3 ), 3 ) );
@@ -97,13 +98,13 @@
 
 			for ( var i = 0; i < count; i ++ ) {
 
-				color.setHSL( ( positions1.getY( i ) / radius + 1 ) / 2, 1.0, 0.5 );
+				color.setHSL( ( positions1.getX( i ) / radius + 1 ) / 2, 1.0, 0.5 );
 				colors1.setXYZ( i, color.r, color.g, color.b );
 
-				color.setHSL( 0, ( positions2.getY( i ) / radius + 1 ) / 2, 0.5 );
+				color.setHSL( 0, ( positions2.getX( i ) / radius + 1 ) / 2, 0.5 );
 				colors2.setXYZ( i, color.r, color.g, color.b );
 
-				color.setRGB( 1, 0.8 - ( positions3.getY( i ) / radius + 1 ) / 2, 0 );
+				color.setRGB( 1, 0.8 - ( positions3.getX( i ) / radius + 1 ) / 2, 0 );
 				colors3.setXYZ( i, color.r, color.g, color.b );
 
 			}
@@ -145,11 +146,11 @@
 			// container.appendChild( stats.dom );
 
 			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			document.getElementById("playpausebutton").addEventListener( 'click', startstop, false );
 
 			// window.addEventListener( 'resize', onWindowResize, false );
 
 		}
-
 
 		function onDocumentMouseMove( event ) {
 
@@ -157,7 +158,6 @@
 			mouseY = ( event.clientY - windowHalfY );
 
 		}
-
 
 		function animate() {
 
@@ -177,7 +177,23 @@
 
 		}
 
+		function startstop() {
+			if(flag===true){
+
+				document.getElementById('playpausebutton').src="sins/blueplaydull.png";
+				flag=false;
+
+			}else{
+
+				document.getElementById('playpausebutton').src="sins/bluepausedull.png";
+				flag=true;
+
+			}
+
+		}
+
 	</script>
+
 	<noscript>The simulation requires JavaScript to be enabled.</noscript>
 </head>
 <body>
@@ -190,7 +206,6 @@
 	<div id="vartitle">VARIABLES</div>
 
 	<div id="variables">
-
 		<div class="variable">
 			<div class="varname">
 				<p title="Link Length">Temp(C<sup>o</sup>)</p>
