@@ -20,7 +20,7 @@
 
 		var windowHalfY = window.innerHeight / 2;
 		// var windowHalfY = 250;
-		
+
 		init();
 		animate();
 
@@ -185,7 +185,7 @@
 
 				$('#l1slider').slider("value", $('#l1spinner').spinner('value'));  //updating slider location with change in spinner(debug) -->
 				temperature=$('#l1spinner').spinner("value");
-				alert(temperature);
+				console.log(temperature);
 			}
 
 		}
@@ -247,7 +247,7 @@
 		<div class="variable">
 			<div class="varname">
 				<p title="Link Length">Temp(C<sup>o</sup>)</p>
-				<input type="number" placeholder="30" id="Temp" autocomplete="off" >
+				<input id="l1spinner" type="number" placeholder="30" id="Temp" autocomplete="off" >
 				<div id="l1slider"></div>
 			</div>
 		</div>
