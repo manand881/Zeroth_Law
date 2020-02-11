@@ -52,6 +52,12 @@ div#copyright
 	font-size: 12px;
 	font-family:sans-serif;
 }
+
+input#Temp{
+
+	width:140px;
+
+}
 #tabchangeforward
 {
 	position: absolute;
