@@ -10,6 +10,7 @@
 
 		import * as THREE from './js/three.module.js';
 
+		var temperature=30;
 		var flag=true;
 		var container, stats;
 		var camera, scene, renderer;
@@ -19,7 +20,7 @@
 
 		var windowHalfY = window.innerHeight / 2;
 		// var windowHalfY = 250;
-
+		
 		init();
 		animate();
 
@@ -147,34 +148,44 @@
 
 			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 			document.getElementById("playpausebutton").addEventListener( 'click', startstop, false );
+
 			varinit();
+
 			function varinit()
 			{
+
 				varchange();
-				//Variable r1 slider and number input types
+
 				$('#l1slider').slider("value", 30);
 				$('#l1spinner').spinner("value", 30);
+
 			}
 
 			function varchange()
 			{
-//Variable r1 slider and number input types
-				$('#l1slider').slider({ max : 100, min : 30, step : 1 });		// slider initialisation : jQuery widget
-				$('#l1spinner').spinner({ max : 100, min : 30, step : 1 });		// number initialisation : jQuery widget
-// monitoring change in value and connecting slider and number
-// setting trace point coordinate arrays to empty on change of link length
+
+				$('#l1slider').slider({ max : 100, min : 30, step : 1 });					// slider initialisation : jQuery widget
+				$('#l1spinner').spinner({ max : 100, min : 30, step : 1 });					// number initialisation : jQuery widget
+
+				// monitoring change in value and connecting slider and number
+				// setting trace point coordinate arrays to empty on change of link length
+
 				$( "#l1slider" ).on( "slide", function( e, ui ) { $('#l1spinner').spinner("value",ui.value);  } );
 				$( "#l1spinner" ).on( "spin", function( e, ui ) { $('#l1slider').slider("value",ui.value); } );
 				$( "#l1spinner" ).on( "change", function() {  varchange() } );
+
 				varupdate();
+
 			}
+
 			//Computing of various system parameters
+
 			function varupdate()
 			{
 
 				$('#l1slider').slider("value", $('#l1spinner').spinner('value'));  //updating slider location with change in spinner(debug) -->
-				var len=$('#l1spinner').spinner("value");
-				
+				temperature=$('#l1spinner').spinner("value");
+				alert(temperature);
 			}
 
 		}
@@ -190,7 +201,6 @@
 
 			requestAnimationFrame( animate );
 			render();
-			// stats.update();
 
 		}
 
@@ -205,6 +215,7 @@
 		}
 
 		function startstop() {
+
 			if(flag===true){
 
 				document.getElementById('playpausebutton').src="sins/blueplaydull.png";
