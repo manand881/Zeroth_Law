@@ -147,8 +147,34 @@
 
 			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 			document.getElementById("playpausebutton").addEventListener( 'click', startstop, false );
+			varinit();
+			function varinit()
+			{
+				varchange();
+				//Variable r1 slider and number input types
+				$('#l1slider').slider("value", 30);
+				$('#l1spinner').spinner("value", 30);
+			}
 
-			// window.addEventListener( 'resize', onWindowResize, false );
+			function varchange()
+			{
+//Variable r1 slider and number input types
+				$('#l1slider').slider({ max : 100, min : 30, step : 1 });		// slider initialisation : jQuery widget
+				$('#l1spinner').spinner({ max : 100, min : 30, step : 1 });		// number initialisation : jQuery widget
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+				$( "#l1slider" ).on( "slide", function( e, ui ) { $('#l1spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
+				$( "#l1spinner" ).on( "spin", function( e, ui ) { $('#l1slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+				$( "#l1spinner" ).on( "change", function() {  varchange() } );
+				varupdate();
+			}
+			//Computing of various system parameters
+			function varupdate()
+			{
+
+				$('#l1slider').slider("value", $('#l1spinner').spinner('value'));  //updating slider location with change in spinner(debug) -->
+				var len=$('#l1spinner').spinner("value");
+			}
 
 		}
 
@@ -209,9 +235,9 @@
 		<div class="variable">
 			<div class="varname">
 				<p title="Link Length">Temp(C<sup>o</sup>)</p>
-				<input id="l1spinner" type="number" placeholder="30" id="Temp" value="" autocomplete="off" size="20">
+				<input type="number" placeholder="30" id="Temp" autocomplete="off" >
+				<div id="l1slider"></div>
 			</div>
-			<div id="l1slider"></div>
 		</div>
 	</div>
 </div>
