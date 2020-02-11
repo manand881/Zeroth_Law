@@ -163,8 +163,8 @@
 				$('#l1spinner').spinner({ max : 100, min : 30, step : 1 });		// number initialisation : jQuery widget
 // monitoring change in value and connecting slider and number
 // setting trace point coordinate arrays to empty on change of link length
-				$( "#l1slider" ).on( "slide", function( e, ui ) { $('#l1spinner').spinner("value",ui.value); ptx=[]; pty=[]; } );
-				$( "#l1spinner" ).on( "spin", function( e, ui ) { $('#l1slider').slider("value",ui.value); ptx=[]; pty=[]; } );
+				$( "#l1slider" ).on( "slide", function( e, ui ) { $('#l1spinner').spinner("value",ui.value);  } );
+				$( "#l1spinner" ).on( "spin", function( e, ui ) { $('#l1slider').slider("value",ui.value); } );
 				$( "#l1spinner" ).on( "change", function() {  varchange() } );
 				varupdate();
 			}
@@ -174,6 +174,7 @@
 
 				$('#l1slider').slider("value", $('#l1spinner').spinner('value'));  //updating slider location with change in spinner(debug) -->
 				var len=$('#l1spinner').spinner("value");
+				
 			}
 
 		}
