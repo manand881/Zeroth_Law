@@ -42,6 +42,10 @@
 			var light = new THREE.DirectionalLight( 0xffffff );
 			light.position.set( 0, 0, 1 );
 			scene.add( light );
+
+			var light2 = new THREE.DirectionalLight( 0xffffff );
+			light2.position.set( 0, 0, -1 );
+			scene.add( light2 );
 			
 			var canvas = document.createElement( 'canvas' );
 			canvas.width = 128;
@@ -149,6 +153,26 @@
 			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 			document.getElementById("playpausebutton").addEventListener( 'click', startstop, false );
 
+			$(window).bind('mousewheel DOMMouseScroll', function(event){
+				if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
+
+					if(camera.position.z > -4000){
+
+						camera.position.z = camera.position.z - 100;
+
+					}
+
+				}
+				else {
+
+					if(camera.position.z < 4000) {
+
+						camera.position.z = camera.position.z + 100;
+
+					}
+
+				}
+			});
 
 			varinit();
 
@@ -174,7 +198,6 @@
 				$( "#l1slider" ).on( "slide", function( e, ui ) { $('#l1spinner').spinner("value",ui.value);varupdate();  } );
 				$( "#l1spinner" ).on( "spin", function( e, ui ) { $('#l1slider').slider("value",ui.value); } );
 				$( "#l1spinner" ).on( "change", function() {  varchange() } );
-				// $( "#l1slider" ).on( "slide", function() {  varupdate() } );
 
 
 				varupdate();
