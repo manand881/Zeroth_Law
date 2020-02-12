@@ -103,13 +103,13 @@
 
 			for ( var i = 0; i < count; i ++ ) {
 
-				color.setHSL( ( positions1.getX( i ) / radius + 1 ) / 2, 1.0, 0.5 );
+				color.setHSL( ( positions1.getX( i ) / radius + 1 ) / 2, 1, 0.5 );			// Left Ball
 				colors1.setXYZ( i, color.r, color.g, color.b );
 
-				color.setHSL( 0, ( positions2.getX( i ) / radius + 1 ) / 2, 0.5 );
+				color.setHSL( 0, ( positions2.getX( i ) / radius + 1 ) / 2, 0.5 );			// Right Ball
 				colors2.setXYZ( i, color.r, color.g, color.b );
 
-				color.setRGB( 1, 0.8 - ( positions3.getX( i ) / radius + 1 ) / 2, 0 );
+				color.setRGB( 0, 0 - ( positions3.getX( i ) / radius + 1 ) / 2, 1 );		// Middle Ball
 				colors3.setXYZ( i, color.r, color.g, color.b );
 
 			}
