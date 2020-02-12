@@ -103,7 +103,7 @@
 			colour_it();
 
 			function colour_it() {
-				alert("called colour_it");
+
 				for (var i = 0; i < count; i++) {
 
 					color.setHex(colour_array[$('#l1spinner').spinner("value") - 30]);										// Left Ball
@@ -158,6 +158,7 @@
 			document.getElementById("playpausebutton").addEventListener( 'click', startstop, false );
 
 			$(window).bind('mousewheel DOMMouseScroll', function(event){
+
 				if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
 
 					if(camera.position.z > -4000){
@@ -167,6 +168,7 @@
 					}
 
 				}
+
 				else {
 
 					if(camera.position.z < 4000) {
@@ -178,9 +180,9 @@
 				}
 			});
 
-
 			function varinit()
 			{
+
 				varchange();
 
 				$('#l1slider').slider("value", 30);
@@ -198,8 +200,8 @@
 				// monitoring change in value and connecting slider and number
 				// setting trace point coordinate arrays to empty on change of link length
 
-				$( "#l1slider" ).on( "slide", function( e, ui ) { $('#l1spinner').spinner("value",ui.value);varupdate();  } );
-				$( "#l1spinner" ).on( "spin", function( e, ui ) { $('#l1slider').slider("value",ui.value); } );
+				$( "#l1slider" ).on( "slide",   function( e, ui ) { $('#l1spinner').spinner("value",ui.value);varupdate();  } );
+				$( "#l1spinner" ).on( "spin",   function( e, ui ) { $('#l1slider').slider("value",ui.value); } );
 				$( "#l1spinner" ).on( "change", function() {  varchange() } );
 
 				varupdate();
@@ -213,8 +215,6 @@
 
 				$('#l1slider').slider("value", $('#l1spinner').spinner('value'));  //updating slider location with change in spinner(debug) -->
 				temperature=$('#l1spinner').spinner("value");
-				console.log(temperature);
-				console.log(colour_array[$('#l1spinner').spinner("value")-30]);
 				document.getElementById("commentboxleft").innerHTML=$('#l1spinner').spinner("value")+" Degrees Celsius";
 				colour_it();
 
@@ -275,7 +275,6 @@
 	<div id="commentboxleft"></div>
 	<div id="commentboxright"></div>
 	<div id="vartitle">VARIABLES</div>
-
 	<div id="variables">
 		<div class="variable">
 			<div class="varname">
