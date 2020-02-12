@@ -15,11 +15,9 @@
 		var container, stats;
 		var camera, scene, renderer;
 		var mouseX = 0, mouseY = 0;
-		var windowHalfX = window.innerWidth / 2;
-		// var windowHalfX = 250;
 
+		var windowHalfX = window.innerWidth / 2;
 		var windowHalfY = window.innerHeight / 2;
-		// var windowHalfY = 250;
 
 		init();
 		animate();
@@ -30,11 +28,8 @@
 			container.width=500;
 			container.height=400;
 
-			// camera = new THREE.PerspectiveCamera( 20, window.innerWidth / window.innerHeight, 1, 10000 );
 			camera = new THREE.PerspectiveCamera( 20, 1.5, 1, 10000 );
-			// console.log(window.innerWidth / window.innerHeight);
 			camera.position.z = 2600;
-			var test=camera.position.z;
 
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color( 0xffffff );
@@ -94,22 +89,26 @@
 			var geometry3  = geometry1.clone();
 
 			var color	   = new THREE.Color();
-			var positions1 = geometry1.attributes.position;
-			var positions2 = geometry2.attributes.position;
-			var positions3 = geometry3.attributes.position;
+			// var positions1 = geometry1.attributes.position;
+			// var positions2 = geometry2.attributes.position;
+			// var positions3 = geometry3.attributes.position;
 			var colors1	   = geometry1.attributes.color;
 			var colors2    = geometry2.attributes.color;
 			var colors3    = geometry3.attributes.color;
 
+			var colour_array=["0xf10103","0xee0205","0xeb0308","0xe8050a","0xe5060d","0xe20710","0xdf0812","0xdd0915","0xda0a18","0xd70c1a","0xd40d1d","0xd10e1f","0xce0f22","0xcb1025","0xc81127","0xc5122a","0xc2142d","0xbf152f","0xbc1632","0xb91735","0xb61837","0xb4193a","0xb11b3c","0xae1c3f","0xab1d42","0xa81e44","0xa51f47","0xa22049","0x9f214c","0x9c234f","0x992451","0x962554","0x932657","0x902759","0x8d285c","0x8b2a5f","0x882b61","0x852c64","0x822d66","0x7f2e69","0x7c2f6c","0x79306e","0x763271","0x733373","0x703476","0x6d3579","0x6a367b","0x67377e","0x643881","0x613a83","0x5f3b86","0x5c3c88","0x593d8b","0x563e8e","0x533f90","0x504193","0x4d4296","0x4a4398","0x47449b","0x44459d","0x4146a0","0x3e47a3","0x3b49a5","0x384aa8","0x364bab","0x334cad","0x304db0","0x2d4eb3","0x2a50b5","0x2751b8","0x2452ba"];
+
+			varinit();
+
 			for ( var i = 0; i < count; i ++ ) {
 
-				color.setHSL( ( positions1.getX( i ) / radius + 1 ) / 2, 1, 0.5 );			// Left Ball
+				color.setHex(colour_array[$('#l1spinner').spinner("value")-30]);										// Left Ball
 				colors1.setXYZ( i, color.r, color.g, color.b );
 
-				color.setHSL( 0, ( positions2.getX( i ) / radius + 1 ) / 2, 0.5 );			// Right Ball
+				color.setHex(colour_array[$('#l1spinner').spinner("value")-30]);										// Right Ball
 				colors2.setXYZ( i, color.r, color.g, color.b );
 
-				color.setRGB( 0, 0 - ( positions3.getX( i ) / radius + 1 ) / 2, 1 );		// Middle Ball
+				color.setHex(colour_array[$('#l1spinner').spinner("value")-30]);										// Middle Ball
 				colors3.setXYZ( i, color.r, color.g, color.b );
 
 			}
@@ -127,7 +126,6 @@
 			var wireframe = new THREE.Mesh( geometry1, wireframeMaterial );
 			mesh.add( wireframe );
 			mesh.position.x = - 400;
-			// mesh.rotation.x = - 1.87;
 			scene.add( mesh );
 
 			var mesh = new THREE.Mesh( geometry2, material );
@@ -174,7 +172,6 @@
 				}
 			});
 
-			varinit();
 
 			function varinit()
 			{
@@ -212,6 +209,7 @@
 				$('#l1slider').slider("value", $('#l1spinner').spinner('value'));  //updating slider location with change in spinner(debug) -->
 				temperature=$('#l1spinner').spinner("value");
 				console.log(temperature);
+				console.log(colour_array[$('#l1spinner').spinner("value")-30]);
 				document.getElementById("commentboxleft").innerHTML=$('#l1spinner').spinner("value")+" Degrees Celsius";
 
 			}
