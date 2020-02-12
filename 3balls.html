@@ -97,19 +97,25 @@
 			var colors3    = geometry3.attributes.color;
 
 			var colour_array=["0xf10103","0xee0205","0xeb0308","0xe8050a","0xe5060d","0xe20710","0xdf0812","0xdd0915","0xda0a18","0xd70c1a","0xd40d1d","0xd10e1f","0xce0f22","0xcb1025","0xc81127","0xc5122a","0xc2142d","0xbf152f","0xbc1632","0xb91735","0xb61837","0xb4193a","0xb11b3c","0xae1c3f","0xab1d42","0xa81e44","0xa51f47","0xa22049","0x9f214c","0x9c234f","0x992451","0x962554","0x932657","0x902759","0x8d285c","0x8b2a5f","0x882b61","0x852c64","0x822d66","0x7f2e69","0x7c2f6c","0x79306e","0x763271","0x733373","0x703476","0x6d3579","0x6a367b","0x67377e","0x643881","0x613a83","0x5f3b86","0x5c3c88","0x593d8b","0x563e8e","0x533f90","0x504193","0x4d4296","0x4a4398","0x47449b","0x44459d","0x4146a0","0x3e47a3","0x3b49a5","0x384aa8","0x364bab","0x334cad","0x304db0","0x2d4eb3","0x2a50b5","0x2751b8","0x2452ba"];
-
+			// https://codepen.io/BangEqual/pen/VLNowO
 			varinit();
 
-			for ( var i = 0; i < count; i ++ ) {
+			colour_it();
 
-				color.setHex(colour_array[$('#l1spinner').spinner("value")-30]);										// Left Ball
-				colors1.setXYZ( i, color.r, color.g, color.b );
+			function colour_it() {
+				alert("called colour_it");
+				for (var i = 0; i < count; i++) {
 
-				color.setHex(colour_array[$('#l1spinner').spinner("value")-30]);										// Right Ball
-				colors2.setXYZ( i, color.r, color.g, color.b );
+					color.setHex(colour_array[$('#l1spinner').spinner("value") - 30]);										// Left Ball
+					colors1.setXYZ(i, color.r, color.g, color.b);
 
-				color.setHex(colour_array[$('#l1spinner').spinner("value")-30]);										// Middle Ball
-				colors3.setXYZ( i, color.r, color.g, color.b );
+					color.setHex(colour_array[$('#l1spinner').spinner("value") - 30]);										// Right Ball
+					colors2.setXYZ(i, color.r, color.g, color.b);
+
+					color.setHex(colour_array[$('#l1spinner').spinner("value") - 30]);										// Middle Ball
+					colors3.setXYZ(i, color.r, color.g, color.b);
+
+				}
 
 			}
 
@@ -179,6 +185,7 @@
 
 				$('#l1slider').slider("value", 30);
 				$('#l1spinner').spinner("value", 30);
+				document.getElementById("commentboxleft").innerHTML=$('#l1spinner').spinner("value")+" Degrees Celsius";
 
 			}
 
@@ -187,15 +194,13 @@
 
 				$('#l1slider').slider({ max : 100, min : 30, step : 1 });					// slider initialisation : jQuery widget
 				$('#l1spinner').spinner({ max : 100, min : 30, step : 1 });					// number initialisation : jQuery widget
-				$('#l1slider').slider("value", 30);
-				$('#l1spinner').spinner("value", 30);
+
 				// monitoring change in value and connecting slider and number
 				// setting trace point coordinate arrays to empty on change of link length
 
 				$( "#l1slider" ).on( "slide", function( e, ui ) { $('#l1spinner').spinner("value",ui.value);varupdate();  } );
 				$( "#l1spinner" ).on( "spin", function( e, ui ) { $('#l1slider').slider("value",ui.value); } );
 				$( "#l1spinner" ).on( "change", function() {  varchange() } );
-
 
 				varupdate();
 
@@ -211,6 +216,7 @@
 				console.log(temperature);
 				console.log(colour_array[$('#l1spinner').spinner("value")-30]);
 				document.getElementById("commentboxleft").innerHTML=$('#l1spinner').spinner("value")+" Degrees Celsius";
+				colour_it();
 
 			}
 
