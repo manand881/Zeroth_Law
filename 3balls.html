@@ -10,14 +10,15 @@
 
 		import * as THREE from './js/three.module.js';
 
-		var temperature=30;
-		var flag=true;
+		var temperature = 30;
+		var flag = true;
 		var container, stats;
-		var camera, scene, renderer;
+		var camera, scene;
+		var renderer= new THREE.WebGLRenderer( { antialias: true } );
 		var mouseX = 0, mouseY = 0;
-
 		var windowHalfX = window.innerWidth / 2;
 		var windowHalfY = window.innerHeight / 2;
+		var material;
 
 		init();
 		animate();
@@ -25,8 +26,8 @@
 		function init() {
 
 			container = document.getElementById( 'container' );
-			container.width=500;
-			container.height=400;
+			container.width = 500;
+			container.height = 400;
 
 			camera = new THREE.PerspectiveCamera( 20, 1.5, 1, 10000 );
 			camera.position.z = 2600;
@@ -41,7 +42,7 @@
 			var light2 = new THREE.DirectionalLight( 0xffffff );
 			light2.position.set( 0, 0, -1 );
 			scene.add( light2 );
-			
+
 			var canvas = document.createElement( 'canvas' );
 			canvas.width = 128;
 			canvas.height = 128;
@@ -85,45 +86,48 @@
 			var count = geometry1.attributes.position.count;
 			geometry1.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( count * 3 ), 3 ) );
 
-			var geometry2  = geometry1.clone();
-			var geometry3  = geometry1.clone();
+			var geometry2 = geometry1.clone();
+			var geometry3 = geometry1.clone();
 
-			var color	   = new THREE.Color();
+			var color	  = new THREE.Color();
 			// var positions1 = geometry1.attributes.position;
 			// var positions2 = geometry2.attributes.position;
 			// var positions3 = geometry3.attributes.position;
-			var colors1	   = geometry1.attributes.color;
-			var colors2    = geometry2.attributes.color;
-			var colors3    = geometry3.attributes.color;
+			var colors1	  = geometry1.attributes.color;
+			var colors2   = geometry2.attributes.color;
+			var colors3   = geometry3.attributes.color;
 
-			var colour_array=["0xf10103","0xee0205","0xeb0308","0xe8050a","0xe5060d","0xe20710","0xdf0812","0xdd0915","0xda0a18","0xd70c1a","0xd40d1d","0xd10e1f","0xce0f22","0xcb1025","0xc81127","0xc5122a","0xc2142d","0xbf152f","0xbc1632","0xb91735","0xb61837","0xb4193a","0xb11b3c","0xae1c3f","0xab1d42","0xa81e44","0xa51f47","0xa22049","0x9f214c","0x9c234f","0x992451","0x962554","0x932657","0x902759","0x8d285c","0x8b2a5f","0x882b61","0x852c64","0x822d66","0x7f2e69","0x7c2f6c","0x79306e","0x763271","0x733373","0x703476","0x6d3579","0x6a367b","0x67377e","0x643881","0x613a83","0x5f3b86","0x5c3c88","0x593d8b","0x563e8e","0x533f90","0x504193","0x4d4296","0x4a4398","0x47449b","0x44459d","0x4146a0","0x3e47a3","0x3b49a5","0x384aa8","0x364bab","0x334cad","0x304db0","0x2d4eb3","0x2a50b5","0x2751b8","0x2452ba"];
+			var colour_array = ["0x038fe7","0x068de4","0x098be0","0x0c89dd","0x0f87da","0x1285d7","0x1583d3","0x1881d0","0x1b7fcd","0x1e7dca","0x217bc6","0x2379c3","0x2677c0","0x2975bd","0x2c73b9","0x2f71b6","0x326fb3","0x356db0","0x386bac","0x3b69a9","0x3e67a6","0x4165a3","0x44639f","0x47619c","0x4a5f99","0x4d5d96","0x505b92","0x53598f","0x56578c","0x595589","0x5c5385","0x5f5182","0x624f7f","0x654d7c","0x684b78","0x6b4975","0x6d4672","0x70446f","0x73426b","0x764068","0x793e65","0x7c3c62","0x7f3a5e","0x82385b","0x853658","0x883455","0x8b3251","0x8e304e","0x912e4b","0x942c48","0x972a44","0x9a2841","0x9d263e","0xa0243b","0xa32237","0xa62034","0xa91e31","0xac1c2e","0xaf1a2a","0xb11827","0xb41624","0xb71421","0xba121d","0xbd101a","0xc00e17","0xc30c14","0xc60a10","0xc9080d","0xcc060a","0xcf0407","0xd20203"];
 			// https://codepen.io/BangEqual/pen/VLNowO
+
 			varinit();
 
-			colour_it();
-			function colour_it() {
 
-				for (var i = 0; i < count; i++) {
+			for ( let i = 0; i < count; i++ ) {
 
-					color.setHex(colour_array[$('#l1spinner').spinner("value") - 30]);										// Left Ball
-					colors1.setXYZ(i, color.r, color.g, color.b);
+				color.setHex(0xffffff);																		// Left Ball
+				colors1.setXYZ(i, color.r, color.g, color.b);
 
-					color.setHex(colour_array[$('#l1spinner').spinner("value") - 30]);										// Right Ball
-					colors2.setXYZ(i, color.r, color.g, color.b);
+				color.setHex(0xffffff);																		// Right Ball
+				colors2.setXYZ(i, color.r, color.g, color.b);
 
-					color.setHex(colour_array[$('#l1spinner').spinner("value") - 30]);										// Middle Ball
-					colors3.setXYZ(i, color.r, color.g, color.b);
-
-				}
+				color.setHex(0xffffff);																		// Middle Ball
+				colors3.setXYZ(i, color.r, color.g, color.b);
 
 			}
 
-			var material = new THREE.MeshPhongMaterial( {
+			materialfunc();
+			function materialfunc(){
+
+			material = new THREE.MeshPhongMaterial( {
 				color: 0xffffff,
 				flatShading: true,
 				vertexColors: THREE.VertexColors,
 				shininess: 0
 			} );
+
+				material.color.setHex(colour_array[$('#l1spinner').spinner("value")-30]);
+
 
 			var wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true, transparent: true } );
 
@@ -144,11 +148,13 @@
 			mesh.add( wireframe );
 			scene.add( mesh );
 
-			renderer = new THREE.WebGLRenderer( { antialias: true } );
+			// renderer = new THREE.WebGLRenderer( { antialias: true } );
 			renderer.setPixelRatio( window.devicePixelRatio );
 			// renderer.setSize( window.innerWidth, window.innerHeight );
 			renderer.setSize( 570, 400 );
 			container.appendChild( renderer.domElement );
+
+			}
 
 			// stats = new Stats();
 			// container.appendChild( stats.dom );
@@ -199,9 +205,30 @@
 				// monitoring change in value and connecting slider and number
 				// setting trace point coordinate arrays to empty on change of link length
 
-				$( "#l1slider" ).on( "slide",   function( e, ui ) { $('#l1spinner').spinner("value",ui.value);varupdate();  } );
-				$( "#l1spinner" ).on( "spin",   function( e, ui ) { $('#l1slider').slider("value",ui.value); } );
-				$( "#l1spinner" ).on( "change", function() {  varchange() } );
+				$( "#l1slider" ).on( "slide",   function( e, ui ) {
+
+					$('#l1spinner').spinner("value",ui.value);
+					varupdate();
+					materialfunc();
+
+				} );
+
+
+				$( "#l1spinner" ).on( "spin",   function( e, ui ) {
+
+					$('#l1slider').slider("value",ui.value);
+					materialfunc();
+
+				} );
+
+
+				$( "#l1spinner" ).on( "change", function() {
+
+					varchange();
+					materialfunc();
+
+				} );
+
 
 				varupdate();
 
@@ -215,7 +242,7 @@
 				$('#l1slider').slider("value", $('#l1spinner').spinner('value'));  //updating slider location with change in spinner(debug) -->
 				temperature=$('#l1spinner').spinner("value");
 				document.getElementById("commentboxleft").innerHTML=$('#l1spinner').spinner("value")+" Degrees Celsius";
-				colour_it();
+				// material.color.setHex(colour_array[$('#l1spinner').spinner("value")-30]);
 
 			}
 
@@ -247,15 +274,15 @@
 
 		function startstop() {
 
-			if(flag===true){
+			if(flag === true){
 
 				document.getElementById('playpausebutton').src="sins/blueplaydull.png";
-				flag=false;
+				flag = false;
 
 			}else{
 
 				document.getElementById('playpausebutton').src="sins/bluepausedull.png";
-				flag=true;
+				flag = true;
 
 			}
 
@@ -278,7 +305,7 @@
 		<div class="variable">
 			<div class="varname">
 				<p title="Temperature">Temp(C<sup>o</sup>)</p>
-				<input id="l1spinner" type="number" placeholder="30" id="Temp" autocomplete="off" >
+				<input id="l1spinner" type="number" placeholder="30" autocomplete="off" >
 				<div id="l1slider"></div>
 			</div>
 		</div>
@@ -287,9 +314,7 @@
 <!--    DND-Title of region for controls display-->
 <div id="ctrltitle">CONTROLS</div>
 <!-- Region for User controls of simulation-->
-<div id="controls">
-	<img id="playpausebutton" src="sins/bluepausedull.png" />
-</div>
+<div id="controls"><img id="playpausebutton" src="sins/bluepausedull.png"  alt="PLay Pause"/></div>
 <!-- DND-Copyright display-->
 <div id="copyright" title="Developer : SOLVEr"> Copyright &copy; SOLVE The Virtual Lab @ NITK Surathkal </div>
 </body>
