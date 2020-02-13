@@ -117,9 +117,6 @@
 			materialfunc();
 			function materialfunc(){
 
-				var x=0;
-				var iter=colour_array[x];
-
 				material = new THREE.MeshPhongMaterial( {
 					color: 0xffffff,
 					flatShading: true,
@@ -172,7 +169,6 @@
 				renderer.setSize( 570, 400 );
 				container.appendChild( renderer.domElement );
 
-
 			}
 
 			// stats = new Stats();
@@ -220,8 +216,6 @@
 				document.getElementById("p1").innerHTML="Temp A = "+$('#l1spinner').spinner("value")+" Degrees Celsius";
 				document.getElementById("p2").innerHTML="Temp B = "+$('#l1spinner').spinner("value")+" Degrees Celsius";
 				document.getElementById("p3").innerHTML="Temp C = "+$('#l1spinner').spinner("value")+" Degrees Celsius";
-
-
 
 			}
 
@@ -336,19 +330,19 @@
 	<div id="variables">
 		<div class="variable">
 			<div class="varname">
-				<p title="Temperature">Temp A(C<sup>o</sup>)</p>
+				<p title="Temperature">Temp A (C<sup>o</sup>)</p>
 				<input id="l1spinner" type="number" placeholder="30" autocomplete="off" >
 				<div id="l1slider"></div>
 			</div>
 			<br>
 			<div class="varname">
-				<p title="Temperature">Temp B(C<sup>o</sup>)</p>
+				<p title="Temperature">Temp B (C<sup>o</sup>)</p>
 				<input id="l1spinner2" type="number" placeholder="30" autocomplete="off" >
 				<div id="l1slider2"></div>
 			</div>
 			<br>
 			<div class="varname">
-				<p title="Temperature">Temp C(C<sup>o</sup>)</p>
+				<p title="Temperature">Temp C (C<sup>o</sup>)</p>
 				<input id="l1spinner3" type="number" placeholder="30" autocomplete="off" >
 				<div id="l1slider3"></div>
 			</div>
