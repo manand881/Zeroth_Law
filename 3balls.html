@@ -154,13 +154,13 @@
 				mesh = new THREE.Mesh( geometry1, material2 );
 				wireframe = new THREE.Mesh( geometry1, wireframeMaterial );
 				mesh.add( wireframe );
-				mesh.position.x = - 400;
+				mesh.position.x = - 410;
 				scene.add( mesh );
 
 				mesh = new THREE.Mesh( geometry2, material3 );
 				wireframe = new THREE.Mesh( geometry2, wireframeMaterial );
 				mesh.add( wireframe );
-				mesh.position.x = 400;
+				mesh.position.x = 410;
 				scene.add( mesh );
 
 				mesh = new THREE.Mesh( geometry3, material );
@@ -280,10 +280,24 @@
 				console.log(temperature,temperature2,temperature3);
 				if(temperature===temperature2&&temperature2==temperature3){
 
-					document.getElementById("commentboxright").innerHTML="The three bodies are at the same temperature";
+					document.getElementById("commentboxright").innerHTML="The three bodies A, B and C are at the same Temperature";
 
 				}else{
+					if(temperature===temperature2){
+
+						document.getElementById("commentboxright").innerHTML="The bodies A and B are at the same Temperature";
+					}
+					else if(temperature2===temperature3){
+
+						document.getElementById("commentboxright").innerHTML="The bodies B and C are at the same Temperature";
+					}
+					else if(temperature===temperature3){
+
+						document.getElementById("commentboxright").innerHTML="The bodies A and C are at the same Temperature";
+					}
+					else{
 					document.getElementById("commentboxright").innerHTML="";
+					}
 				}
 
 
